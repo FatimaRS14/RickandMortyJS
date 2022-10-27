@@ -78,7 +78,8 @@ const loadInfo = (e) =>{
     setTimeout(() =>{
         modalContent.removeChild(modalContent.firstChild);
         const content = document.createElement('div');
-        content.innerHTML='<h2>你好!</h2>';
+        const id = e.target.getAttribute('data-id');
+        content.innerHTML=`<h2>Id ${id}</h2>`;
         modalContent.appendChild(content);
     }, 3000);
   }
