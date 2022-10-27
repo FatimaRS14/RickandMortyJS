@@ -53,7 +53,7 @@ const creaCard = (personaje) => {
     class="btn btn-primary"
     data-bs-toggle="modal"
     data-bs-target="#exampleModal"
-    data-id="${personaje.id}">Ver más</p>
+    data-id="${personaje.id}">Ver más</a>
   </div>
 </div>
 `;
