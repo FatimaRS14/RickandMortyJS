@@ -68,6 +68,35 @@ const navegacion = (e)  => {
   }
 }
 
+const modalBody = (personaje) => {
+  const div = document.createElement('div');
+  div.classList.add('text-center');
+  let html = `` ;
+  html += `<img src="${personaje.image}" class="thumbnail">`;
+  html += `<p>${personaje.status}- ${personaje.species}</p>`;
+  html += `<p>Ultima ubicacion conocida</p> <p>${personaje.origin.name}</p>`;
+  html += `<p>Ha aparecido en ${personaje.episode.length}Episodios</p>`;
+  div.innerHTML = html;
+  return div;
+}
+
+const showCharactersById = (id) => {
+  //se pedira la informacion de los personajes 
+  const urlId = `${urlBase}${id}`;
+  fetch(urlId)
+    .then(result => result.json())
+    .then(character => {
+      const modalContent = document.querySelector('.modal-body');
+      document.querySelector('.modal-title').innerText=character.name;
+      console.log(character.image);
+      console.log(character.status);
+      console.log(character.origin.name);
+      console.log(character.species);
+      console.log(character.episode.length);
+      modalContent.appendChild(modalBody(character));
+    });
+}
+
 const loadInfo = (e) =>{
   e.preventDefault();
   if(e.target.classList.contains('btn')){
@@ -77,9 +106,10 @@ const loadInfo = (e) =>{
     modalContent.appendChild(spinner());
     setTimeout(() =>{
         modalContent.removeChild(modalContent.firstChild);
-        const content = document.createElement('div');
-        const id = e.target.getAttribute('data-id');
-        content.innerHTML=`<h2>Id ${id}</h2>`;
+       // const content = document.createElement('div');
+       const id = e.target.getAttribute('data-id');
+        //content.innerHTML=`<h2>Id ${id}</h2>`;
+        const content= showCharactersById(id);
         modalContent.appendChild(content);
     }, 3000);
   }
